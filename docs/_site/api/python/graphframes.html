@@ -1,0 +1,559 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>graphframes package &#8212; pygraphframes 0.7.0 documentation</title>
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/pygraphframes.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/pygraphframes.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="graphframes.examples package" href="graphframes.examples.html" />
+    <link rel="prev" title="Welcome to the GraphFrames Python API docs!" href="index.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="graphframes.examples.html" title="graphframes.examples package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to the GraphFrames Python API docs!"
+             accesskey="P">previous</a> |</li>
+    
+        <li class="nav-item nav-item-0"><a href="index.html">pygraphframes 0.7.0 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="graphframes-package">
+<h1>graphframes package<a class="headerlink" href="#graphframes-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="graphframes.examples.html">graphframes.examples package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="graphframes.lib.html">graphframes.lib package</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="module-graphframes">
+<span id="contents"></span><h2>Contents<a class="headerlink" href="#module-graphframes" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="graphframes.GraphFrame">
+<em class="property">class </em><code class="descclassname">graphframes.</code><code class="descname">GraphFrame</code><span class="sig-paren">(</span><em>v</em>, <em>e</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphframes/graphframe.html#GraphFrame"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphframes.GraphFrame" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents a graph with vertices and edges stored as DataFrames.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>v</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code> holding vertex information.
+Must contain a column named “id” that stores unique
+vertex IDs.</li>
+<li><strong>e</strong> – <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code> holding edge information.
+Must contain two columns “src” and “dst” storing source
+vertex IDs and destination vertex IDs of edges, respectively.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">localVertices</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;A&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="s2">&quot;B&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">localEdges</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="s2">&quot;love&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="s2">&quot;hate&quot;</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="s2">&quot;follow&quot;</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">sqlContext</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">localVertices</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">sqlContext</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">localEdges</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;src&quot;</span><span class="p">,</span> <span class="s2">&quot;dst&quot;</span><span class="p">,</span> <span class="s2">&quot;action&quot;</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">GraphFrame</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="method">
+<dt id="graphframes.GraphFrame.aggregateMessages">
+<code class="descname">aggregateMessages</code><span class="sig-paren">(</span><em>aggCol</em>, <em>sendToSrc=None</em>, <em>sendToDst=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphframes/graphframe.html#GraphFrame.aggregateMessages"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphframes.GraphFrame.aggregateMessages" title="Permalink to this definition">¶</a></dt>
+<dd><p>Aggregates messages from the neighbours.</p>
+<p>When specifying the messages and aggregation function, the user may reference columns using
+the static methods in <a class="reference internal" href="graphframes.lib.html#graphframes.lib.AggregateMessages" title="graphframes.lib.AggregateMessages"><code class="xref py py-class docutils literal notranslate"><span class="pre">graphframes.lib.AggregateMessages</span></code></a>.</p>
+<p>See Scala documentation for more details.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>aggCol</strong> – the requested aggregation output either as
+<code class="xref py py-class docutils literal notranslate"><span class="pre">pyspark.sql.Column</span></code> or SQL expression string</li>
+<li><strong>sendToSrc</strong> – message sent to the source vertex of each triplet either as
+<code class="xref py py-class docutils literal notranslate"><span class="pre">pyspark.sql.Column</span></code> or SQL expression string (default: None)</li>
+<li><strong>sendToDst</strong> – message sent to the destination vertex of each triplet either as
+<code class="xref py py-class docutils literal notranslate"><span class="pre">pyspark.sql.Column</span></code> or SQL expression string (default: None)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">DataFrame with columns for the vertex ID and the resulting aggregated message</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphframes.GraphFrame.bfs">
+<code class="descname">bfs</code><span class="sig-paren">(</span><em>fromExpr</em>, <em>toExpr</em>, <em>edgeFilter=None</em>, <em>maxPathLength=10</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphframes/graphframe.html#GraphFrame.bfs"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphframes.GraphFrame.bfs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Breadth-first search (BFS).</p>
+<p>See Scala documentation for more details.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DataFrame with one Row for each shortest path between matching vertices.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphframes.GraphFrame.cache">
+<code class="descname">cache</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphframes/graphframe.html#GraphFrame.cache"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphframes.GraphFrame.cache" title="Permalink to this definition">¶</a></dt>
+<dd><p>Persist the dataframe representation of vertices and edges of the graph with the default
+storage level.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphframes.GraphFrame.connectedComponents">
+<code class="descname">connectedComponents</code><span class="sig-paren">(</span><em>algorithm='graphframes'</em>, <em>checkpointInterval=2</em>, <em>broadcastThreshold=1000000</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphframes/graphframe.html#GraphFrame.connectedComponents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphframes.GraphFrame.connectedComponents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Computes the connected components of the graph.</p>
+<p>See Scala documentation for more details.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>algorithm</strong> – connected components algorithm to use (default: “graphframes”)
+Supported algorithms are “graphframes” and “graphx”.</li>
+<li><strong>checkpointInterval</strong> – checkpoint interval in terms of number of iterations (default: 2)</li>
+<li><strong>broadcastThreshold</strong> – broadcast threshold in propagating component assignments
+(default: 1000000)</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">DataFrame with new vertices column “component”</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="graphframes.GraphFrame.degrees">
+<code class="descname">degrees</code><a class="headerlink" href="#graphframes.GraphFrame.degrees" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>The degree of each vertex in the graph, returned as a DataFrame with two columns:</dt>
+<dd><ul class="first last simple">
+<li>“id”: the ID of the vertex</li>
+<li>‘degree’ (integer) the degree of the vertex</li>
+</ul>
+</dd>
+</dl>
+<p>Note that vertices with 0 edges are not returned in the result.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DataFrame with new vertices column “degree”</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphframes.GraphFrame.dropIsolatedVertices">
+<code class="descname">dropIsolatedVertices</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphframes/graphframe.html#GraphFrame.dropIsolatedVertices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphframes.GraphFrame.dropIsolatedVertices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Drops isolated vertices, vertices are not contained in any edges.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">GraphFrame with filtered vertices.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="graphframes.GraphFrame.edges">
+<code class="descname">edges</code><a class="headerlink" href="#graphframes.GraphFrame.edges" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code> holding edge information, with unique columns “src” and
+“dst” storing source vertex IDs and destination vertex IDs of edges,
+respectively.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphframes.GraphFrame.filterEdges">
+<code class="descname">filterEdges</code><span class="sig-paren">(</span><em>condition</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphframes/graphframe.html#GraphFrame.filterEdges"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphframes.GraphFrame.filterEdges" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filters the edges based on expression, keep all vertices.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>condition</strong> – String or Column describing the condition expression for filtering.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">GraphFrame with filtered edges.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphframes.GraphFrame.filterVertices">
+<code class="descname">filterVertices</code><span class="sig-paren">(</span><em>condition</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphframes/graphframe.html#GraphFrame.filterVertices"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphframes.GraphFrame.filterVertices" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filters the vertices based on expression, remove edges containing any dropped vertices.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>condition</strong> – String or Column describing the condition expression for filtering.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">GraphFrame with filtered vertices and edges.</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphframes.GraphFrame.find">
+<code class="descname">find</code><span class="sig-paren">(</span><em>pattern</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphframes/graphframe.html#GraphFrame.find"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphframes.GraphFrame.find" title="Permalink to this definition">¶</a></dt>
+<dd><p>Motif finding.</p>
+<p>See Scala documentation for more details.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>pattern</strong> – String describing the motif to search for.</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">DataFrame with one Row for each instance of the motif found</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="graphframes.GraphFrame.inDegrees">
+<code class="descname">inDegrees</code><a class="headerlink" href="#graphframes.GraphFrame.inDegrees" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>The in-degree of each vertex in the graph, returned as a DataFame with two columns:</dt>
+<dd><ul class="first last simple">
+<li>“id”: the ID of the vertex</li>
+<li>“inDegree” (int) storing the in-degree of the vertex</li>
+</ul>
+</dd>
+</dl>
+<p>Note that vertices with 0 in-edges are not returned in the result.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DataFrame with new vertices column “inDegree”</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphframes.GraphFrame.labelPropagation">
+<code class="descname">labelPropagation</code><span class="sig-paren">(</span><em>maxIter</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphframes/graphframe.html#GraphFrame.labelPropagation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphframes.GraphFrame.labelPropagation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs static label propagation for detecting communities in networks.</p>
+<p>See Scala documentation for more details.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>maxIter</strong> – the number of iterations to be performed</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">DataFrame with new vertices column “label”</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="graphframes.GraphFrame.outDegrees">
+<code class="descname">outDegrees</code><a class="headerlink" href="#graphframes.GraphFrame.outDegrees" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="docutils">
+<dt>The out-degree of each vertex in the graph, returned as a DataFrame with two columns:</dt>
+<dd><ul class="first last simple">
+<li>“id”: the ID of the vertex</li>
+<li>“outDegree” (integer) storing the out-degree of the vertex</li>
+</ul>
+</dd>
+</dl>
+<p>Note that vertices with 0 out-edges are not returned in the result.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DataFrame with new vertices column “outDegree”</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphframes.GraphFrame.pageRank">
+<code class="descname">pageRank</code><span class="sig-paren">(</span><em>resetProbability=0.15</em>, <em>sourceId=None</em>, <em>maxIter=None</em>, <em>tol=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphframes/graphframe.html#GraphFrame.pageRank"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphframes.GraphFrame.pageRank" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the PageRank algorithm on the graph.
+Note: Exactly one of fixed_num_iter or tolerance must be set.</p>
+<p>See Scala documentation for more details.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>resetProbability</strong> – Probability of resetting to a random vertex.</li>
+<li><strong>sourceId</strong> – (optional) the source vertex for a personalized PageRank.</li>
+<li><strong>maxIter</strong> – If set, the algorithm is run for a fixed number
+of iterations. This may not be set if the <cite>tol</cite> parameter is set.</li>
+<li><strong>tol</strong> – If set, the algorithm is run until the given tolerance.
+This may not be set if the <cite>numIter</cite> parameter is set.</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">GraphFrame with new vertices column “pagerank” and new edges column “weight”</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphframes.GraphFrame.parallelPersonalizedPageRank">
+<code class="descname">parallelPersonalizedPageRank</code><span class="sig-paren">(</span><em>resetProbability=0.15</em>, <em>sourceIds=None</em>, <em>maxIter=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphframes/graphframe.html#GraphFrame.parallelPersonalizedPageRank"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphframes.GraphFrame.parallelPersonalizedPageRank" title="Permalink to this definition">¶</a></dt>
+<dd><p>Run the personalized PageRank algorithm on the graph,
+from the provided list of sources in parallel for a fixed number of iterations.</p>
+<p>See Scala documentation for more details.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>resetProbability</strong> – Probability of resetting to a random vertex</li>
+<li><strong>sourceIds</strong> – the source vertices for a personalized PageRank</li>
+<li><strong>maxIter</strong> – the fixed number of iterations this algorithm runs</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">GraphFrame with new vertices column “pageranks” and new edges column “weight”</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphframes.GraphFrame.persist">
+<code class="descname">persist</code><span class="sig-paren">(</span><em>storageLevel=StorageLevel(False</em>, <em>True</em>, <em>False</em>, <em>False</em>, <em>1)</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphframes/graphframe.html#GraphFrame.persist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphframes.GraphFrame.persist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Persist the dataframe representation of vertices and edges of the graph with the given
+storage level.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="graphframes.GraphFrame.pregel">
+<code class="descname">pregel</code><a class="headerlink" href="#graphframes.GraphFrame.pregel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the <a class="reference internal" href="graphframes.lib.html#graphframes.lib.Pregel" title="graphframes.lib.Pregel"><code class="xref py py-class docutils literal notranslate"><span class="pre">graphframes.lib.Pregel</span></code></a> object for running pregel.</p>
+<p>See <a class="reference internal" href="graphframes.lib.html#graphframes.lib.Pregel" title="graphframes.lib.Pregel"><code class="xref py py-class docutils literal notranslate"><span class="pre">graphframes.lib.Pregel</span></code></a> for more details.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphframes.GraphFrame.shortestPaths">
+<code class="descname">shortestPaths</code><span class="sig-paren">(</span><em>landmarks</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphframes/graphframe.html#GraphFrame.shortestPaths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphframes.GraphFrame.shortestPaths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the shortest path algorithm from a set of landmark vertices in the graph.</p>
+<p>See Scala documentation for more details.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>landmarks</strong> – a set of one or more landmarks</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">DataFrame with new vertices column “distances”</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphframes.GraphFrame.stronglyConnectedComponents">
+<code class="descname">stronglyConnectedComponents</code><span class="sig-paren">(</span><em>maxIter</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphframes/graphframe.html#GraphFrame.stronglyConnectedComponents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphframes.GraphFrame.stronglyConnectedComponents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the strongly connected components algorithm on this graph.</p>
+<p>See Scala documentation for more details.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>maxIter</strong> – the number of iterations to run</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">DataFrame with new vertex column “component”</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphframes.GraphFrame.svdPlusPlus">
+<code class="descname">svdPlusPlus</code><span class="sig-paren">(</span><em>rank=10</em>, <em>maxIter=2</em>, <em>minValue=0.0</em>, <em>maxValue=5.0</em>, <em>gamma1=0.007</em>, <em>gamma2=0.007</em>, <em>gamma6=0.005</em>, <em>gamma7=0.015</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphframes/graphframe.html#GraphFrame.svdPlusPlus"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphframes.GraphFrame.svdPlusPlus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Runs the SVD++ algorithm.</p>
+<p>See Scala documentation for more details.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">Tuple of DataFrame with new vertex columns storing learned model, and loss value</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphframes.GraphFrame.triangleCount">
+<code class="descname">triangleCount</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphframes/graphframe.html#GraphFrame.triangleCount"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphframes.GraphFrame.triangleCount" title="Permalink to this definition">¶</a></dt>
+<dd><p>Counts the number of triangles passing through each vertex in this graph.</p>
+<p>See Scala documentation for more details.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DataFrame with new vertex column “count”</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="graphframes.GraphFrame.triplets">
+<code class="descname">triplets</code><a class="headerlink" href="#graphframes.GraphFrame.triplets" title="Permalink to this definition">¶</a></dt>
+<dd><p>The triplets (source vertex)-[edge]-&gt;(destination vertex) for all edges in the graph.</p>
+<dl class="docutils">
+<dt>Returned as a <code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code> with three columns:</dt>
+<dd><ul class="first last simple">
+<li>“src”: source vertex with schema matching ‘vertices’</li>
+<li>“edge”: edge with schema matching ‘edges’</li>
+<li>‘dst’: destination vertex with schema matching ‘vertices’</li>
+</ul>
+</dd>
+</dl>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">DataFrame with columns ‘src’, ‘edge’, and ‘dst’</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="graphframes.GraphFrame.unpersist">
+<code class="descname">unpersist</code><span class="sig-paren">(</span><em>blocking=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphframes/graphframe.html#GraphFrame.unpersist"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphframes.GraphFrame.unpersist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mark the dataframe representation of vertices and edges of the graph as non-persistent,
+and remove all blocks for it from memory and disk.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="graphframes.GraphFrame.vertices">
+<code class="descname">vertices</code><a class="headerlink" href="#graphframes.GraphFrame.vertices" title="Permalink to this definition">¶</a></dt>
+<dd><p><code class="xref py py-class docutils literal notranslate"><span class="pre">DataFrame</span></code> holding vertex information, with unique column “id”
+for vertex IDs.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">graphframes package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#module-graphframes">Contents</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to the GraphFrames Python API docs!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="graphframes.examples.html"
+                        title="next chapter">graphframes.examples package</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/graphframes.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="graphframes.examples.html" title="graphframes.examples package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to the GraphFrames Python API docs!"
+             >previous</a> |</li>
+    
+        <li class="nav-item nav-item-0"><a href="index.html">pygraphframes 0.7.0 documentation</a> &#187;</li>
+ 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2016, Timothy Hunter and Joseph Bradley.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.0.
+    </div>
+  </body>
+</html>
