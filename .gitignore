@@ -3,7 +3,6 @@
 *.pyc
 build/*.jar
 
-docs/_site
 docs/api
 
 # sbt specific
