@@ -6,7 +6,7 @@
   <head>
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>graphframes.examples.belief_propagation &#8212; pygraphframes 0.7.0 documentation</title>
+    <title>graphframes.examples.belief_propagation &#8212; pygraphframes 0.8.0 documentation</title>
     <link rel="stylesheet" href="../../../_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/pygraphframes.css" />
@@ -29,7 +29,7 @@
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
     
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pygraphframes 0.7.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pygraphframes 0.8.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" accesskey="U">Module code</a> &#187;</li> 
       </ul>
@@ -60,12 +60,11 @@
 
 <span class="kn">import</span> <span class="nn">math</span>
 
-<span class="kn">from</span> <span class="nn">pyspark</span> <span class="k">import</span> <span class="n">SparkConf</span><span class="p">,</span> <span class="n">SparkContext</span>
-<span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="k">import</span> <span class="n">SQLContext</span><span class="p">,</span> <span class="n">functions</span> <span class="k">as</span> <span class="n">sqlfunctions</span><span class="p">,</span> <span class="n">types</span>
-<span class="kn">from</span> <span class="nn">pyspark.tests</span> <span class="k">import</span> <span class="n">QuietTest</span> <span class="k">as</span> <span class="n">SuppressSparkLogs</span>
+<span class="kn">from</span> <span class="nn">pyspark</span> <span class="kn">import</span> <span class="n">SparkConf</span><span class="p">,</span> <span class="n">SparkContext</span>
+<span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SQLContext</span><span class="p">,</span> <span class="n">functions</span> <span class="k">as</span> <span class="n">sqlfunctions</span><span class="p">,</span> <span class="n">types</span>
 
-<span class="kn">from</span> <span class="nn">graphframes</span> <span class="k">import</span> <span class="n">GraphFrame</span>
-<span class="kn">from</span> <span class="nn">graphframes.lib</span> <span class="k">import</span> <span class="n">AggregateMessages</span> <span class="k">as</span> <span class="n">AM</span>
+<span class="kn">from</span> <span class="nn">graphframes</span> <span class="kn">import</span> <span class="n">GraphFrame</span>
+<span class="kn">from</span> <span class="nn">graphframes.lib</span> <span class="kn">import</span> <span class="n">AggregateMessages</span> <span class="k">as</span> <span class="n">AM</span>
 <span class="c1"># Import subpackage examples here explicitly so that this module can be</span>
 <span class="c1"># run directly with spark-submit.</span>
 <span class="kn">import</span> <span class="nn">graphframes.examples</span>
@@ -200,22 +199,20 @@
     <span class="n">sc</span> <span class="o">=</span> <span class="n">SparkContext</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
     <span class="n">sql</span> <span class="o">=</span> <span class="n">SQLContext</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">(</span><span class="n">sc</span><span class="p">)</span>
 
-    <span class="k">with</span> <span class="n">SuppressSparkLogs</span><span class="p">(</span><span class="n">sc</span><span class="p">):</span>
+    <span class="c1"># create graphical model g of size 3 x 3</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">graphframes</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">Graphs</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span><span class="o">.</span><span class="n">gridIsingModel</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original Ising model:&quot;</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">vertices</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-        <span class="c1"># create graphical model g of size 3 x 3</span>
-        <span class="n">g</span> <span class="o">=</span> <span class="n">graphframes</span><span class="o">.</span><span class="n">examples</span><span class="o">.</span><span class="n">Graphs</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span><span class="o">.</span><span class="n">gridIsingModel</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Original Ising model:&quot;</span><span class="p">)</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">vertices</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">edges</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="c1"># run BP for 5 iterations</span>
+    <span class="n">numIter</span> <span class="o">=</span> <span class="mi">5</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">BeliefPropagation</span><span class="o">.</span><span class="n">runBPwithGraphFrames</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">numIter</span><span class="p">)</span>
 
-        <span class="c1"># run BP for 5 iterations</span>
-        <span class="n">numIter</span> <span class="o">=</span> <span class="mi">5</span>
-        <span class="n">results</span> <span class="o">=</span> <span class="n">BeliefPropagation</span><span class="o">.</span><span class="n">runBPwithGraphFrames</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">numIter</span><span class="p">)</span>
-
-        <span class="c1"># display beliefs</span>
-        <span class="n">beliefs</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">vertices</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;belief&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done with BP. Final beliefs after </span><span class="si">{}</span><span class="s2"> iterations:&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">numIter</span><span class="p">))</span>
-        <span class="n">beliefs</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+    <span class="c1"># display beliefs</span>
+    <span class="n">beliefs</span> <span class="o">=</span> <span class="n">results</span><span class="o">.</span><span class="n">vertices</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;belief&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Done with BP. Final beliefs after </span><span class="si">{}</span><span class="s2"> iterations:&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">numIter</span><span class="p">))</span>
+    <span class="n">beliefs</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
     <span class="n">sc</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 
@@ -254,7 +251,7 @@
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
     
-        <li class="nav-item nav-item-0"><a href="../../../index.html">pygraphframes 0.7.0 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../../index.html">pygraphframes 0.8.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li> 
       </ul>
